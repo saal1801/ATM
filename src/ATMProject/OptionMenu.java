@@ -14,7 +14,7 @@ public class OptionMenu extends Account {
     //for User & Password
     final HashMap<Integer, Integer> data = new HashMap<>();
 
-    public void getLoin() throws Exception {
+    public void getLoin() {
 
         int x = 1;
         while (x == 1) {

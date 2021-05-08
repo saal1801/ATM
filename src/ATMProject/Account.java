@@ -9,8 +9,8 @@ public class Account {
     private int pinNumber;
     private int checkingBalance = 0;
     private int savingBalance = 0;
-    private int [] notes = new int[] {1000, 500, 100};
-    private int [] noteCounter = new int[3];
+    private final int[] notes = new int[]{1000, 500, 100};
+    private final int[] noteCounter = new int[3];
 
     final Scanner input = new Scanner(System.in);
 
@@ -59,35 +59,30 @@ public class Account {
         System.out.println("Amount you want to withdraw from Checking Account: ");
         int amount = input.nextInt();
 
+        if ((checkingBalance - amount) >= 0) {
+            calcCheckingWithdraw(amount);
+            System.out.println("New Checking Account Balance: " + checkingBalance);
+        } else {
+            System.out.println("Balance Cannot be Negative." + "\n");
+        }
+
         //count notes using Greedy approach
         for (int i = 0; i < 3; i++) {
-            if (amount >= notes[i]) {
+            if (amount >= notes[i]) {      // || (checkingBalance - amount) >= 0
                 noteCounter[i] = amount / notes[i];
                 amount = amount - noteCounter[i] * notes[i];
             }
         }
 
+
         //Print notes
         for (int i = 0; i < 3; i++) {
-            if (noteCounter[i] != 0){
+            if (noteCounter[i] != 0) {
                 System.out.println(notes[i] + " : " + noteCounter[i]);
             }
         }
-
     }
 
-    /* public void getCheckingWithdrawInput() {
-        System.out.println("Checking Account Balance: " + checkingBalance);
-        System.out.println("Amount you want to withdraw from Checking Account: ");
-        int amount = input.nextInt();
-
-        if ((checkingBalance - amount) >= 0) {
-            calcCheckingWithdraw(amount);
-            System.out.println("New Checking Account Balance: " + checkingBalance);
-        }else {
-            System.out.println("Balance Cannot be Negative." + "\n");
-        }
-    }*/
 
     public void getSavingWithdrawInput() {
         System.out.println("Saving Account Balance: " + savingBalance);
@@ -102,17 +97,17 @@ public class Account {
         }
     }
 
-        public void getCheckDepositInput() {
-            System.out.println("Checking Account Balance: " + checkingBalance);
-            System.out.println("Amount you want to Deposit from Checking Account: ");
-            int amount = input.nextInt();
+    public void getCheckDepositInput() {
+        System.out.println("Checking Account Balance: " + checkingBalance);
+        System.out.println("Amount you want to Deposit from Checking Account: ");
+        int amount = input.nextInt();
 
-            if ((checkingBalance + amount) >= 0) {
-                calcCheckingDeposit(amount);
-                System.out.println("New Checking Account Balance: " + checkingBalance);
-        }else {
-                System.out.println("Balance Cannot be Negative. " + "\n");
-            }
+        if ((checkingBalance + amount) >= 0) {
+            calcCheckingDeposit(amount);
+            System.out.println("New Checking Account Balance: " + checkingBalance);
+        } else {
+            System.out.println("Balance Cannot be Negative. " + "\n");
+        }
     }
 
     public void getSavingDepositInput() {
@@ -123,13 +118,9 @@ public class Account {
         if ((savingBalance + amount) >= 0) {
             calcSavingWithdraw(amount);
             System.out.println("New Checking Account Balance: " + savingBalance);
-        }else {
+        } else {
             System.out.println("Balance Cannot be Negative. " + "\n");
         }
     }
-
-
-
-
 
 }
