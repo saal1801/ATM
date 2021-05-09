@@ -53,12 +53,14 @@ public class Account {
 
 
     //business function
+
     public void getCheckingWithdrawInput() {
 
         System.out.println("Checking Account Balance: " + checkingBalance);
         System.out.println("Amount you want to withdraw from Checking Account: ");
         int amount = input.nextInt();
 
+        //Checking Withdraw
         if ((checkingBalance - amount) >= 0) {
             calcCheckingWithdraw(amount);
             System.out.println("New Checking Account Balance: " + checkingBalance);
